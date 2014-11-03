@@ -63,7 +63,9 @@ $> node .
 
 Browse the following address: `http://localhost:3000`
 
-Note: `The initData.js` script will populate Mongo DB with some data so you can use the app.
+You can register a new account or sign in with the following credentials: foo@bar.org / foobar
+
+Note: `The initData.js` script will populate Mongo DB with some data so you can use the application.
 
 # Screen shots
 
