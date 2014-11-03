@@ -79,7 +79,7 @@ Note: `The initData.js` script will populate Mongo DB with some data so you can 
 
 ![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpg)
 
-### Real time monitoring page
+### Real time monitoring dashboard
 
 ![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpg)
 
@@ -87,7 +87,7 @@ Note: `The initData.js` script will populate Mongo DB with some data so you can 
 
 I made ChessHub.io primarily to learn how to make this kind of real-time applications with a non hello world use case.
 
-I am aware of the excellent MEAN.io project, but I decided to go from the ground up without code generation to understand how things work behind the scene.
+I am aware of the excellent <a href="http://mean.io" target="_blank">MEAN.io</a> project, but I decided to go from the ground up without code generation to understand how things work behind the scene.
 
 I am not an expert in all these technologies, so there are probably some points of improvement in the application design, structure or code.
 
@@ -95,4 +95,4 @@ If you believe there is best practice I have not followed, please let me know by
 
 # License
 
-ChessHub.io is released under the MIT license.
+ChessHub.io is released under the MIT license (see LICENSE file).
