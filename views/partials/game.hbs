@@ -1,0 +1,71 @@
+<div class="row">
+
+    <div id="board" class="col-md-7" data-token="{{ token }}" data-side="{{ side }}"></div>
+
+    <div id="game-details" class="col-md-4 col-md-offset-1">
+
+        <div class="panel panel-info ">
+            <div class="panel-heading">
+                <h4 class="panel-title">Players</h4>
+            </div>
+            <div class="panel-body">
+                <p >
+                    <img src="/images/chesspieces/wikipedia/bK.png" class="side-img" alt="Black"/>
+                    <span id="player-black"></span> <span class="turn" id="turn-b">&nbsp;<i class=""></i></span>
+                </p>
+                <p>
+                    <img src="/images/chesspieces/wikipedia/wK.png" class="side-img" alt="White"/>
+                    <span id="player-white"></span> <span class="turn" id="turn-w">&nbsp;<i class=""></i></span>
+                </p>
+            </div>
+        </div>
+
+        <div class="panel panel-info ">
+            <div class="panel-heading">
+                <h4 class="panel-title">Moves</h4>
+            </div>
+            <div class="panel-body">
+                <textarea id="pgn"></textarea>
+            </div>
+            <div class="panel-footer">
+                <button id="resignButton" type="button" class="btn btn-danger center-block">Resign</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="gameResultPopup" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Game Over</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="gameResult"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/" class="btn btn-danger">Return to home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="gameUrlPopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Game URL</h4>
+                </div>
+                <div class="modal-body">
+                    <p>To invite a friend, give the following URL:</p>
+                    <p><em><span class="text-info" id="gameUrl"></span></em></p>
+                    <p>The game will be started once your friend joined the game.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

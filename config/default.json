@@ -1,0 +1,5 @@
+{
+    "chesshub": {
+        "db": "mongodb://localhost/test"
+    }
+}

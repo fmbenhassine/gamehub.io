@@ -1,0 +1,40 @@
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="text-center">My profile</h3>
+                <h6 class="text-center">last connection: {{ lastConnection }}</h6>
+            </div>
+            <div class="panel-body">
+                <form  role="form" action="/account" method="post">
+                    <div class="form-group">
+                        <label for="username" >User name</label>
+                        <input type="email" class="form-control" id="username" placeholder="{{ user.name }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" >Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="{{ user.email }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" >Current password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword" >New password</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword" >Confirm new password</label>
+                        <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new password" required="required">
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="center-block btn btn-danger">Update my password</button>
+                    </div>
+                </form>
+            </div>
+            <div id="updateStatus" hidden="hidden" data-ok="{{ updateStatus }}">{{ updateMessage }}</div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-info ">
+            <div class="panel-heading">
+                <h3 class="panel-title">Please sign in</h3>
+            </div>
+            <form role="form" method="post" action="/login">
+                <div class="panel-body">
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" placeholder="Email" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                </div>
+                <div class="panel-footer">
+                    <p><button type="submit" class="btn btn-default center-block">Submit</button></p>
+                    <p class="text-center">You don't have an account yet? register <a href="/register">here</a></p>
+                </div>
+            </form>
+        </div>
+        <div id="loginError" hidden="hidden">{{ error }}</div>
+    </div>
+</div>

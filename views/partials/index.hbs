@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Welcome to Chess Hub! Here is the quote of the day</h3>
+        </div>
+        <div class="panel-body">
+            <blockquote>
+                <p>{{ quote.content }}</p>
+                <footer>{{ quote.author }}</footer>
+            </blockquote>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 trg">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Top rated live game on Chess Hub</h3>
+            </div>
+            <div class="panel-body">
+                <div id="trg"></div>
+                <div class="caption">
+                    <h5 class="text-center">G. Kasparov <em>vs</em> V. Anand</h5>
+                    <h5 class="text-center">
+                        <a href="/tv">View game on Chess Hub Tv</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pod">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Puzzle of the day</h3>
+            </div>
+            <div class="panel-body">
+                <div id="pod" data-fen="{{ puzzle.content }}"></div>
+                <div class="caption">
+                    <h5 class="text-center">{{ puzzle.comment }}</h5>
+                    <h5 class="text-center">
+                        <a id="podSolution" href="javascript:void(0)" data-toggle="popover"
+                           data-placement="bottom" data-content="{{ puzzle.solution }}">show solution</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="logoutSuccess" hidden="hidden">{{ logoutSuccessMessage }}</div>
+    <div id="registerSuccess" hidden="hidden">{{ registerSuccessMessage }}</div>
+    <div id="welcomeMessage" hidden="hidden">{{ welcomeMessage }}</div>
+
+</div>

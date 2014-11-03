@@ -1,0 +1,37 @@
+<div id="monitor" class="row">
+
+    <div class="col-md-6 trg">
+        <div class="panel panel-info ">
+            <div class="panel-heading">
+                <h3 class="panel-title">Server Health</h3>
+            </div>
+            <div class="panel-body">
+                <h5> <i class="fa fa-database"></i> Mongo DB: <span class="alert-{{ status.mongo }}" id="mongoStatus"><i class="fa fa-{{ icon.mongo }}-o"></i></span></h5>
+                <h5> <i class="fa fa-cloud"></i> API service: <span class="alert-{{ status.api }}" id="apiStatus"><i class="fa fa-{{ icon.api }}-o"></i></span></span></h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pod">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Server Statistics</h3>
+            </div>
+            <div class="panel-body">
+                <h5> Active users: <span id="nbUsers"></span></h5>
+                <h5> Active games: <span id="nbGames"></span></h5>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div id="chart"></div>
+        </div>
+    </div>
+
+</div>
