@@ -1,6 +1,6 @@
 # About ChessHub.io
 
-ChessHub.io is an attempt to make a non trivial real-time multi-player gaming web application using the following technologies:
+ChessHub.io is an attempt to make a non trivial real-time multiplayer gaming web application using the following technologies:
 
 ## Client side
 
@@ -20,7 +20,7 @@ ChessHub.io is an attempt to make a non trivial real-time multi-player gaming we
 
 # Why Chess?
 
-* Because it is a good use case for real-time multi-player gaming
+* Because it is a good use case for real-time multiplayer gaming
 * Because every time you look for a real-time application example on the web, you end up on chat applications, so I decided to change the subject :-)
 * Because I am a chess junkie!
 
@@ -33,7 +33,7 @@ Apart from chess logic, here is a list of reusable features:
 
 * Application structure and setup
 * User authentication and registration process (/login & /register)
-* Real time multi player gaming logic (See gaming logic section)
+* Real time multiplayer gaming logic (See gaming logic section)
 * RESTful API (/api)
 * Real time monitoring dashboard (/monitor)
 * "TV" page to broadcast any real time content (/tv)
@@ -61,25 +61,25 @@ $> node initData.js
 $> node .
 ```
 
-Then browse the following address: `http:localhost:3000`
+Browse the following address: `http://localhost:3000`
 
 Note: `The initData.js` script will populate Mongo DB with some data so you can use the app.
 
 # Screen shots
 
-### Home page
+### * Home page
 
 ![home](https://github.com/benas/chesshub.io/raw/master/site/home.jpg)
 
-### Playing chess in real time
+### * Playing chess in real time
 
 ![play](https://github.com/benas/chesshub.io/raw/master/site/play.jpg)
 
-### Watch live game
+### * Watch live game
 
 ![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpg)
 
-### Real time monitoring dashboard
+### * Real time monitoring dashboard
 
 ![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpg)
 
