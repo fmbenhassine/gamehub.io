@@ -4,7 +4,7 @@ ChessHub.io is an attempt to make a non trivial real-time multiplayer gaming web
 
 ## Client side
 
-* HTML5, CSS3, <a href="http://getbootstrap.com/" target="_blank">Twitter bootstrap</a> and <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font awesome</a> combo to make a nice looking UI
+* HTML5, CSS3, <a href="http://getbootstrap.com/" target="_blank">Twitter bootstrap</a> and <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font awesome</a> to make a nice looking UI
 * <a href="http://jquery.com/" target="_blank">JQuery</a> combined with the inevitable Javascript utilities (<a href="https://lodash.com/" target="_blank">Lodash</a>, <a href="http://momentjs.com/" target="_blank">Moment.js</a>, <a href="http://github.hubspot.com/messenger/" target="_blank">Messenger.js</a> and <a href="http://www.highcharts.com/" target="_blank">Highcharts</a>) for client side logic
 * <a href="http://socket.io/" target="_blank">Socket.io</a> client to make real time gaming possible
 * <a href="https://github.com/jhlywa/chess.js" target="_blank">Chess.js</a> and <a href="http://chessboardjs.com/" target="_blank">Chessboard.js</a> for everything related to chess
@@ -36,7 +36,7 @@ Apart from chess logic, here is a list of reusable features:
 * Real time multiplayer gaming logic (See gaming logic section)
 * RESTful API (/api)
 * Real time monitoring dashboard (/monitor)
-* "TV" page to broadcast any real time content (/tv)
+* "TV" page to broadcast any real-time content (/tv)
 
 Even though the application is related to chess, it is easy to change the domain model along with application logic and keep/adapt the application structure.
 
@@ -67,19 +67,19 @@ Note: `The initData.js` script will populate Mongo DB with some data so you can 
 
 # Screen shots
 
-### * Home page
+### Home page
 
 ![home](https://github.com/benas/chesshub.io/raw/master/site/home.jpg)
 
-### * Playing chess in real time
+### Playing chess in real time
 
 ![play](https://github.com/benas/chesshub.io/raw/master/site/play.jpg)
 
-### * Watch live game
+### Watch live game
 
 ![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpg)
 
-### * Real time monitoring dashboard
+### Real time monitoring dashboard
 
 ![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpg)
 
