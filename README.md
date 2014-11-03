@@ -67,13 +67,13 @@ Note: `The initData.js` script will populate Mongo DB with some data so you can 
 
 # Screen shots
 
-![home](https://github.com/benas/chesshub.io/raw/master/site/home.jpeg)
+![home](https://github.com/benas/chesshub.io/raw/master/site/home.jpg)
 
-![play](https://github.com/benas/chesshub.io/raw/master/site/play.jpeg)
+![play](https://github.com/benas/chesshub.io/raw/master/site/play.jpg)
 
-![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpeg)
+![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpg)
 
-![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpeg)
+![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpg)
 
 # Contribution
 
