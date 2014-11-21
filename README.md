@@ -1,4 +1,5 @@
 # About ChessHub.io
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/benas/chesshub.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ChessHub.io is an attempt to make a non trivial real-time multiplayer gaming web application using the following technologies:
 
