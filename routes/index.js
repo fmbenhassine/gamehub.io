@@ -58,7 +58,7 @@ router.get('/tv', function(req, res) {
 
 router.get('/monitor', function(req, res) {
 
-    /*todo : ping services (mongo and api) and populate status
+    /*todo : ping services (mongo, elasticsearch and api) and populate status
     http.get("http://localhost:3000/api", function(res) {
         var apiStatus = res.statusCode === 200;
         var mongoStatus = mongoose.connection.modelNames().length === 0;
@@ -66,16 +66,19 @@ router.get('/monitor', function(req, res) {
     })*/
     var mongoStatus = "success", mongoIcon = "smile";
     var apiStatus = "success", apiIcon = "smile";
+    var esStatus = "success", esIcon = "smile";
     res.render('partials/monitor', {
         title: 'Chess Hub - Monitor',
         user: req.user,
         status: {
             mongo: mongoStatus,
-            api: apiStatus
+            api: apiStatus,
+            es: esStatus
         },
         icon: {
             mongo: mongoIcon,
-            api: apiIcon
+            api: apiIcon,
+            es: esIcon
         }
     });
 });
