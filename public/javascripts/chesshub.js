@@ -234,13 +234,15 @@ $( document ).ready(function() {
      */
     if ($("#monitor").length) {
 
-        var nbUsers, nbGames;
+        var nbUsers, nbGames, totalGames;
 
         monitorSocket.on('update', function(data) {
             nbUsers = data.nbUsers;
             nbGames = data.nbGames;
+            totalGames = nbGames; // todo: should be set from data.totalGames;
             $("#nbUsers").html(nbUsers);
             $("#nbGames").html(nbGames);
+            $("#totalGames").html(totalGames);
             var chart = $('#chart').highcharts();
             chart.series[0].addPoint(nbUsers, true, true);
             chart.series[1].addPoint(nbGames, true, true);
@@ -274,55 +276,11 @@ $( document ).ready(function() {
                 enabled: false
             },
             series: [{
-                name: 'total users',
+                name: 'active users',
                 data: [0,0,0,0,0,0]
             },{
-                name: 'total games',
+                name: 'active games',
                 data: [0,0,0,0,0,0]
-            }]
-        });
-
-        $('#stats').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: 1,//null,
-                plotShadow: false
-            },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]
             }]
         });
 
