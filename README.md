@@ -41,7 +41,7 @@ GameHub.io uses a simple gaming sequence through Socket.io that works for 2+ pla
 
 1. Each player can create a game by sending a 'create-game' event to the server
 2. The server creates a new game and replies to the player with a randomly generated token for the game
-3. The player sends this token to others players and waits for them to join the game
+3. The player sends this token to other players and waits for them to join the game
 4. Others players join the game by sending a 'join-game' event to the server
 5. Once all players joined the game, the server joins players sockets to the same socket.io room
 6. At this point, the game starts: depending on the game nature, each player can send a random number of events that will be broadcast to other players.
