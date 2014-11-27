@@ -37,7 +37,7 @@ Here is a list of core features:
 
 GameHub.io uses a simple gaming sequence through Socket.io that works for 2+ players. Here is a simplified diagram of most relevant events:
 
-![chesshub.io](https://github.com/benas/chesshub.io/raw/master/site/chesshub-sequence-diagram.jpg)
+![gamehub.io](https://github.com/benas/gamehub.io/raw/master/site/chesshub-sequence-diagram.jpg)
 
 1. Each player can create a game by sending a 'create-game' event to the server
 2. The server creates a new game and replies to the player with a randomly generated token for the game
@@ -93,19 +93,19 @@ Note: `The initData.js` script will populate Mongo DB and ElasticSearch with som
 
 ###### Home page
 
-![home](https://github.com/benas/chesshub.io/raw/master/site/home.jpg)
+![home](https://github.com/benas/gamehub.io/raw/master/site/home.jpg)
 
 ###### Playing chess in real time
 
-![play](https://github.com/benas/chesshub.io/raw/master/site/play.jpg)
+![play](https://github.com/benas/gamehub.io/raw/master/site/play.jpg)
 
 ###### Watch live game
 
-![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpg)
+![tv](https://github.com/benas/gamehub.io/raw/master/site/tv.jpg)
 
 ###### Real time monitoring dashboard
 
-![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpg)
+![monitor](https://github.com/benas/gamehub.io/raw/master/site/monitor.jpg)
 
 # Contribution
 
