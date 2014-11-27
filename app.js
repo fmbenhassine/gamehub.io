@@ -29,6 +29,7 @@ var api = require('./routes/api');
 var play = require('./routes/play');
 var login = require('./routes/login');
 var register = require('./routes/register');
+var search = require('./routes/search');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,6 +61,7 @@ app.use('/register', register);
 app.use('/account', account);
 app.use('/play', play);
 app.use('/api', api);
+app.use('/search', search);
 
 require('./config/errorHandlers.js')(app);
 

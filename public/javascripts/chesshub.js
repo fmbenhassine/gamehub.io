@@ -328,5 +328,43 @@ $( document ).ready(function() {
 
     }
 
+    /*
+     * Search page
+     */
+    if ($("#searchGameForm")) {
+        $( "#searchGameFormSubmit" ).on("click", function( event ) {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/search",
+                data: {
+                    white: $( "input[name$='white']" ).val(),
+                    black: $( "input[name$='black']" ).val(),
+                    content: $( "input[name$='content']" ).val(),
+                    result: $( "input[name$='result']" ).val()
+                },
+                success: function (data){
+                    var games = data.games;
+                    console.log(games.length);
+                    $('#foundGamesTable tbody tr').remove();
+                    for (var i = 0; i < games.length; i++) {
+                        var game = "<tr>" +
+                            "<td>" + games[i]._id + "</td>" +
+                            "<td>" + games[i]._source.white + "</td>" +
+                            "<td>" + games[i]._source.black + "</td>" +
+                            "<td>" + games[i]._source.result + "</td>" +
+                            "<td>" + "<a title='Not implemented' href='#'><i class='fa fa-eye'></i> Preview</a>" + "</td>" +
+                            "</tr>";
+                        $('#foundGamesTable tbody').append(game);
+                    }
+                    $('#totalFoundGames').html(games.length);
+                    $("#searchResult").show();
+                },
+                error: function() {
+                    alert("Error while searching games!");
+                }
+            });
+            event.preventDefault();
+        });
+    }
 });
 

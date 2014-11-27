@@ -54,4 +54,50 @@ User.findOne({email: 'foo@bar.org'} ,function (err, user) {
     mongoose.connection.close();
 });
 
+/* Init elastic search server */
+
+var elasticsearch = require('elasticsearch');
+var client = new elasticsearch.Client(); // default to localhost:9200
+
+client.ping({
+    requestTimeout: 1000
+}, function (error) {
+    if (error) {
+        console.error('elasticsearch is down!');
+    } else {
+        console.log('elasticsearch is up and running!');
+    }
+});
+
+
+client.indices.create({
+    index: 'chesshub'
+}, function() {
+    client.create({
+        index: 'chesshub',
+        type: 'game',
+        id: '1',
+        body: {
+            white: "Foo",
+            black: "Anonymous",
+            content: "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. O-O Bc5 5. c3 O-O 6. d4 exd4 7. cxd4 Bb4",
+            result: "1-0"
+        }
+    }, function(){
+        client.create({
+            index: 'chesshub',
+            type: 'game',
+            id: '2',
+            body: {
+                white: "Anonymous",
+                black: "Bar",
+                content: "1. e4 c6 2. e5 d5 3. exd6 exd6 4. Nf3 Bg4 5. d4 Nf6 6. Bg5 Be7",
+                result: "1-0"
+            }
+        }, function() {
+            client.close();
+        });
+    });
+});
+
 

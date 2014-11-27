@@ -99,3 +99,7 @@ body {
     height: 32px;
     width: 32px;
 }
+
+.table td, th {
+    text-align: center;
+}
