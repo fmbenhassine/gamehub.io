@@ -51,7 +51,7 @@ GameHub.io uses a simple gaming sequence through Socket.io that works for 2+ pla
 
 ### Introduction
 
-ChessHub.io a real time multi player chess server that serves as a sample of how to reuse GameHub.io core features.
+ChessHub.io is a real time multi player chess server that serves as a sample of how to reuse GameHub.io core features.
 
 The goal of ChessHub.io is not to provide a fully featured web application to play chess online.
 
