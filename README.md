@@ -103,6 +103,10 @@ Note: `The initData.js` script will populate Mongo DB and ElasticSearch with som
 
 ![tv](https://github.com/benas/gamehub.io/raw/master/site/tv.jpg)
 
+###### Search a game
+
+![search](https://github.com/benas/gamehub.io/raw/master/site/search.jpg)
+
 ###### Real time monitoring dashboard
 
 ![monitor](https://github.com/benas/gamehub.io/raw/master/site/monitor.jpg)
