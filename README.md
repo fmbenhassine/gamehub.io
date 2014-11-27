@@ -1,15 +1,15 @@
 # About GameHub.io
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/benas/gamehub.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-GameHub.io is an attempt to make a real-time multiplayer gaming server using the following technologies:
+GameHub.io is an attempt to make a real-time multi player gaming server using the following technologies:
 
-## Client side
+### Client side
 
 * HTML5, CSS3, <a href="http://getbootstrap.com/" target="_blank">Twitter bootstrap</a> and <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font awesome</a> to make a nice looking UI
 * <a href="http://jquery.com/" target="_blank">JQuery</a> combined with the inevitable Javascript utilities (<a href="https://lodash.com/" target="_blank">Lodash</a>, <a href="http://momentjs.com/" target="_blank">Moment.js</a>, <a href="http://github.hubspot.com/messenger/" target="_blank">Messenger.js</a> and <a href="http://www.highcharts.com/" target="_blank">Highcharts</a>) for client side logic
 * <a href="http://socket.io/" target="_blank">Socket.io</a> client to make real time gaming possible
 
-## Server side
+### Server side
 
 * <a href="http://nodejs.org/" target="_blank">Node JS</a> as web server
 * <a href="http://expressjs.com/" target="_blank">Express JS</a> as web framework
@@ -17,7 +17,7 @@ GameHub.io is an attempt to make a real-time multiplayer gaming server using the
 * <a href="http://socket.io/" target="_blank">Socket.io</a> server to make real time gaming possible
 * <a href="http://handlebarsjs.com/" target="_blank">Handlebars.js</a> to easily render HTML templates
 * <a href="http://www.mongodb.org/" target="_blank">Mongo DB</a> along with <a href="http://mongoosejs.com/" target="_blank">Mongoose</a>
-* <a href="http://www.elasticsearch.org/" target="_blank">ElasticSearch server for (near) real time game indexing and lookup</a>
+* <a href="http://www.elasticsearch.org/" target="_blank">ElasticSearch</a> server for (near) real time game indexing and lookup</a>
 
 # Goals
 
@@ -27,7 +27,7 @@ Here is a list of core features:
 
 * Application structure and setup
 * User authentication and registration process (/login & /register)
-* Real time multiplayer gaming logic (See gaming logic section)
+* Real time multi player gaming logic (See gaming logic section)
 * RESTful API (/api)
 * Real time monitoring dashboard (/monitor)
 * "TV" page to broadcast any real time content (/tv)
@@ -47,34 +47,35 @@ GameHub.io uses a simple gaming sequence through Socket.io that works for 2+ pla
 6. At this point, the game starts: depending on the game nature, each player can send a random number of events that will be broadcast to other players.
 7. When the game is over, each player is notified and sockets leave the game room
 
-# Use case: ChessHub.io a real time multiplayer chess server
+# Use case: ChessHub.io
+
+### Introduction
+
+ChessHub.io a real time multi player chess server that serves as a sample of how to reuse GameHub.io core features.
+
+The goal of ChessHub.io is not to provide a fully featured web application to play chess online.
+
+Even though the application is related to chess, it is easy to change the domain model along with application logic and keep/adapt the application structure.
 
 ### Why Chess?
 
-* Because it is a good use case for real-time multiplayer gaming
-* Because every time you look for a real-time application example on the web, you end up on chat applications, so I decided to change the landscape :-)
+* Because it is a good use case for real time multi player gaming
+* Because every time you look for a real time application example on the web, you end up on chat applications, so I decided to change the landscape :-)
 * Because I am a chess junkie!
-
-### Goals
-
-The goal of ChessHub.io is not to provide a fully featured web application to play chess online but to provide a use case of
-how to reuse GameHub.io core features to create an online chess server using the aforementioned technologies.
-
-Even though the application is related to chess, it is easy to change the domain model along with application logic and keep/adapt the application structure.
 
 ### Credits
 
 Chess logic on the client side uses the excellent <a href="https://github.com/jhlywa/chess.js" target="_blank">Chess.js</a> and <a href="http://chessboardjs.com/" target="_blank">Chessboard.js</a> libraries.
 
-# Build and Run the application
+### Build and Run the application
 
-## Prerequisites
+#### Prerequisites
 
 * Node JS
 * Mongo DB up and running on the default port (27017) and using the default database (test)
 * ElasticSearch server up and running on the default port (9200)
 
-## Run the application
+#### Run the application
 
 ```
 $> npm install
@@ -88,21 +89,21 @@ You can register a new account or sign in with the following credentials: foo@ba
 
 Note: `The initData.js` script will populate Mongo DB and ElasticSearch with some data so you can use the application.
 
-# Screen shots
+#### Screen shots
 
-### Home page
+###### Home page
 
 ![home](https://github.com/benas/chesshub.io/raw/master/site/home.jpg)
 
-### Playing chess in real time
+###### Playing chess in real time
 
 ![play](https://github.com/benas/chesshub.io/raw/master/site/play.jpg)
 
-### Watch live game
+###### Watch live game
 
 ![tv](https://github.com/benas/chesshub.io/raw/master/site/tv.jpg)
 
-### Real time monitoring dashboard
+###### Real time monitoring dashboard
 
 ![monitor](https://github.com/benas/chesshub.io/raw/master/site/monitor.jpg)
 
