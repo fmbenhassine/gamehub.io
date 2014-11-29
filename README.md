@@ -113,13 +113,9 @@ Note: `The initData.js` script will populate Mongo DB and ElasticSearch with som
 
 # Contribution
 
-I made GameHub.io primarily to learn how to make this kind of real time applications with a non hello world use case.
+There are probably some points of improvement in the application design, structure or code.
 
-I am aware of the excellent <a href="http://mean.io" target="_blank">MEAN.io</a> project, but I decided to go from the ground up without code generation to understand how things work behind the scene.
-
-I am not an expert in all these technologies, so there are probably some points of improvement in the application design, structure or code.
-
-If you believe there is best practice I have not followed, please let me know by opening an issue on the issue tracker. Pull requests are welcome!
+If you believe there is a best practice I have not followed, please let me know by opening an issue on the issue tracker. Pull requests are welcome!
 
 # License
 
