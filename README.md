@@ -67,6 +67,10 @@ Even though the application is related to chess, it is easy to change the domain
 
 Chess logic on the client side uses the excellent <a href="https://github.com/jhlywa/chess.js" target="_blank">Chess.js</a> and <a href="http://chessboardjs.com/" target="_blank">Chessboard.js</a> libraries.
 
+### Live demo
+
+[http://chesshub-benas.rhcloud.com/](http://chesshub-benas.rhcloud.com/)
+
 ### Build and Run the application
 
 #### Prerequisites
