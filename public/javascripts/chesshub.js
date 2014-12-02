@@ -1,5 +1,9 @@
 $( document ).ready(function() {
 
+    /*
+     * When the user is logged in, it's name is loaded in the "data" attribute of the "#loggedUser" element.
+     * This name is then passed to the socket connection handshake query
+     */
     var username;
     if($("#loggedUser").length) {
         username = $("#loggedUser").data("user");
@@ -7,15 +11,24 @@ $( document ).ready(function() {
         username = "Anonymous";
     }
 
+    // socket used for real time games
     var socket = io('http://localhost:3000', { query: 'user=' + username });
+
+    //socket used to broadcast live games on tv page
     var tvSocket = io('http://localhost:3000/tv');
+
+    // socket used to broadcast events to monitoring page
     var monitorSocket = io('http://localhost:3000/monitor');
 
+    // Puzzle of the day: initialize a chess board with puzzle data
     if ($("#pod").length) {
         var pod = new ChessBoard('pod', $("#pod").data('fen'));
         $('#podSolution').popover();
     }
 
+    /*
+     * Show error message on login failure
+     */
     if ($("#loginError").length && !$("#loginError").is(':empty')) {
 
         Messenger({
@@ -28,6 +41,9 @@ $( document ).ready(function() {
         });
     }
 
+    /*
+     * Show error message on registration failure
+     */
     if ($("#registerError").length && !$("#registerError").is(':empty')) {
 
         Messenger({
@@ -40,6 +56,9 @@ $( document ).ready(function() {
         });
     }
 
+    /*
+     * Show message on successful logout
+     */
     if ($("#logoutSuccess").length && !$("#logoutSuccess").is(':empty')) {
 
         Messenger({
@@ -52,6 +71,9 @@ $( document ).ready(function() {
         });
     }
 
+    /*
+     * Show welcome message on registration success
+     */
     if ($("#registerSuccess").length && !$("#registerSuccess").is(':empty')) {
 
         Messenger({
@@ -64,6 +86,9 @@ $( document ).ready(function() {
             });
     }
 
+    /*
+     * Show welcome message on login success
+     */
     if ($("#welcomeMessage").length && !$("#welcomeMessage").is(':empty')) {
 
         Messenger({
@@ -76,6 +101,9 @@ $( document ).ready(function() {
         });
     }
 
+    /*
+     * Show message on account update success
+     */
     if ($("#updateStatus").length && !$("#updateStatus").is(':empty')) {
 
         var ok = $("#updateStatus").data('ok');
@@ -96,12 +124,18 @@ $( document ).ready(function() {
      */
     if ($("#board").length) {
 
+        /*
+         * Initialize a new game
+         */
         var game = new Chess();
         var pgnEl = $('#pgn');
         var token = $("#board").data('token');
         var side = $("#board").data('side');
         var opponentSide = side === "black" ? "white" : "black";
 
+        /*
+         * When a piece is dragged, check if it the current player has the turn
+         */
         var onDragStart = function(source, piece, position, orientation) {
             if (game.game_over() === true ||
                 (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
@@ -111,6 +145,9 @@ $( document ).ready(function() {
             }
         };
 
+        /*
+         * When a piece is dropped, check if the move is legal
+         */
         var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
             // see if the move is legal
             var move = game.move({
@@ -140,6 +177,9 @@ $( document ).ready(function() {
             board.position(game.fen());
         };
 
+        /*
+         * Initialize a new board
+         */
         var cfg = {
             draggable: true,
             position: 'start',
@@ -153,20 +193,29 @@ $( document ).ready(function() {
         };
         var board = new ChessBoard('board', cfg);
 
+        /*
+         * When the game page is loaded, fire a join event to join the game room
+         */
         socket.emit('join', {
             'token': token,
             'side': side
         });
 
-        socket.on('wait', function (data) {
+        /*
+         * When a new game is created, the game creator should wait for an opponent to join the game
+         */
+        socket.on('wait', function () {
             var url = "http:/localhost:3000/game/" + token + "/" + opponentSide;
             $('#gameUrl').html(url);
-            $('#gameUrlPopup').modal({
+            $('#gameUrlPopup').modal({ // show modal popup to wait for opponent
                 keyboard: false,
                 backdrop: 'static'
             });
         });
 
+        /*
+         * A second player has joined the game => the game can start
+         */
         socket.on('ready', function (data) {
             $('#turn-w').addClass("fa fa-spinner");
             $('#player-white').html(data.white);
@@ -174,6 +223,9 @@ $( document ).ready(function() {
             $('#gameUrlPopup').modal('hide');
         });
 
+        /*
+         * A new move has been made by a player => update the UI
+         */
         socket.on('new-move', function(data){
             game.move({ from: data.source, to: data.target });
             board.position( game.fen() );
@@ -182,6 +234,9 @@ $( document ).ready(function() {
             $('#turn-' + game.turn()).addClass("fa fa-spinner");
         });
 
+        /*
+         * A player resigns the game
+         */
         $('#resignButton').click(function (ev) {
             ev.preventDefault();
             socket.emit('resign', {
@@ -190,6 +245,9 @@ $( document ).ready(function() {
             });
         });
 
+        /*
+         * Notify opponent resignation
+         */
         socket.on('player-resigned', function (data) {
             $('#gameResult').html(data.side + ' resigned.');
             $('#gameResultPopup').modal({
@@ -198,7 +256,10 @@ $( document ).ready(function() {
             });
         });
 
-        socket.on('opponent-disconnected', function (data) {
+        /*
+         * Notify opponent disconnection
+         */
+        socket.on('opponent-disconnected', function () {
             $('#gameResult').html('Your opponent has been disconnected.');
             $('#gameResultPopup').modal({
                 keyboard: false,
@@ -206,7 +267,10 @@ $( document ).ready(function() {
             });
         });
 
-        socket.on('full', function (data) {
+        /*
+         * Notify that the game is full => impossible to join the game
+         */
+        socket.on('full', function () {
             alert("This game has been already joined by another person.");
             window.location = '/';
         });
@@ -217,8 +281,8 @@ $( document ).ready(function() {
      * TV page
      */
     if ($("#trg").length) {
-        var trg = new ChessBoard('trg', 'start');
-        tvSocket.on('newTrgMove', function(data){
+        var trg = new ChessBoard('trg', 'start'); // initialize a chess board with the top rated live game
+        tvSocket.on('new-top-rated-game-move', function(data){
             trg.position(data.fen);
             if ($("#tv-game-details").length) {
                 $("#pgn").html(data.pgn);
@@ -237,12 +301,19 @@ $( document ).ready(function() {
         var nbUsers, nbGames, totalGames;
 
         monitorSocket.on('update', function(data) {
+            /*
+             * load monitoring event data
+             */
             nbUsers = data.nbUsers;
             nbGames = data.nbGames;
             totalGames = nbGames; // todo: should be set from data.totalGames;
             $("#nbUsers").html(nbUsers);
             $("#nbGames").html(nbGames);
             $("#totalGames").html(totalGames);
+
+            /*
+             * Update the status chart
+             */
             var chart = $('#chart').highcharts();
             chart.series[0].addPoint(nbUsers, true, true);
             chart.series[1].addPoint(nbGames, true, true);

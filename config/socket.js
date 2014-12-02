@@ -2,41 +2,49 @@ module.exports = function (server) {
 
     var io = require('socket.io').listen(server);
 
-    var ch =  require('chess.js');
+    var chess =  require('chess.js');
 
     /*
      * live show of top rated game
      */
-    var trg = new ch.Chess();
+    var topRatedGame = new chess.Chess(); // fake game (playing random moves). It should be a real game being played on the server
 
-    var tv = io.of('/tv');
+    var tv = io.of('/tv'); // Socket to broadcast top rated game moves to index and tv pages
 
     setInterval(function() {
-        var possibleMoves = trg.moves();
+        var possibleMoves = topRatedGame.moves();
         // if the game is over, reload a new game
-        if (trg.game_over() === true || trg.in_draw() === true || possibleMoves.length === 0) {
-            trg = new ch.Chess();
-            possibleMoves = trg.moves();
+        if (topRatedGame.game_over() === true || topRatedGame.in_draw() === true || possibleMoves.length === 0) {
+            topRatedGame = new chess.Chess();
+            possibleMoves = topRatedGame.moves();
         }
 
-        var m = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
-        trg.move(m);
-        tv.emit('newTrgMove', { fen: trg.fen(), pgn: trg.pgn(), turn: trg.turn() });
+        var move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+        topRatedGame.move(move);
+        tv.emit('new-top-rated-game-move', { fen: topRatedGame.fen(), pgn: topRatedGame.pgn(), turn: topRatedGame.turn() });
     }, 3000);
 
     tv.on('connection', function(socket){
-        socket.emit('newTrgMove', { fen: trg.fen(), pgn: trg.pgn(), turn: trg.turn() });
+        socket.emit('new-top-rated-game-move', { fen: topRatedGame.fen(), pgn: topRatedGame.pgn(), turn: topRatedGame.turn() });
     });
-    //end live show of top rated game
+    /*
+     * End of live show of top rated game
+     */
 
     var games = {};
     var users = 0;
 
+    /*
+     * Socket to use to broadcast monitoring events
+     */
     var monitor = io.of('/monitor');
     monitor.on('connection', function(socket){
         socket.emit('update', {nbUsers: users, nbGames: Object.keys(games).length});
     });
 
+    /*
+     * Socket IO event handlers
+     */
     io.sockets.on('connection', function (socket) {
 
         var username = socket.handshake.query.user;
@@ -44,9 +52,13 @@ module.exports = function (server) {
         users++;
         monitor.emit('update', {nbUsers: users, nbGames: Object.keys(games).length});
 
+        /*
+         * A player joins a game
+         */
         socket.on('join', function (data) {
             var room = data.token;
 
+            // If the player is the first to join, initialize the game and players array
             if (!(room in games)) {
                 var players = [{
                     socket: socket,
@@ -68,13 +80,13 @@ module.exports = function (server) {
                 };
 
                 socket.join(room);
-                socket.emit('wait');
+                socket.emit('wait'); // tell the game creator to wait until a opponent joins the game
                 return;
             }
 
             var game = games[room];
 
-            /* todo: handle full case
+            /* TODO: handle full case, a third player attempts to join the game after already 2 players has joined the game
             if (game.status === "ready") {
                 socket.emit('full');
             }*/
@@ -88,10 +100,16 @@ module.exports = function (server) {
 
         });
 
+        /*
+         * A player makes a new move => broadcast that move to the opponent
+         */
         socket.on('new-move', function(data) {
             socket.broadcast.to(data.token).emit('new-move', data);
         });
 
+        /*
+         * A player resigns => notify opponent, leave game room and delete the game
+         */
         socket.on('resign', function (data) {
             var room = data.token;
             if (room in games) {
@@ -105,6 +123,9 @@ module.exports = function (server) {
             }
         });
 
+        /*
+         * A player disconnects => notify opponent, leave game room and delete the game
+         */
         socket.on('disconnect', function(data){
             users--;
             monitor.emit('update', {nbUsers: users, nbGames: Object.keys(games).length});
@@ -123,6 +144,9 @@ module.exports = function (server) {
 
     });
 
+    /*
+     * Utility function to find the player name of a given side.
+     */
     function getPlayerName(room, side) {
         var game = games[room];
         for (var p in game.players) {
