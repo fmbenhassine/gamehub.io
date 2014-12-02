@@ -20,7 +20,7 @@ module.exports = function (app, mongoose) {
 
     // Reconnect when closed
     mongoose.connection.on('disconnected', function () {
-        connect()
+        connect();
     });
 
 };
