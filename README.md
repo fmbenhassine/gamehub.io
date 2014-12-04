@@ -123,7 +123,7 @@ Example: /api/user/Foo
 
 ```json
 {
-    "_id": "54564692985517c304587d01",
+    "id": "54564692985517c304587d01",
     "name": "Foo",
     "email": "foo@bar.org",
     "lastConnection": "2014-12-02T23:50:59.218Z"
@@ -136,7 +136,7 @@ Example: /api/game/5456476066be11c704942161
 
 ```json
 {
-    "_id":"5456476066be11c704942161",
+    "id":"5456476066be11c704942161",
     "user":"54564692985517c304587d01",
     "white":"Foo",
     "black":"Anonymous",
