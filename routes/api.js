@@ -27,7 +27,12 @@ router.get('/user/:name', function(req, res) {
         if (user == null){
             res.status(404).end();
         } else {
-            res.send(user);
+            res.send({
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                lastConnection: user.lastConnection
+            });
         }
     });
 });
