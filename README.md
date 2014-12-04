@@ -115,6 +115,36 @@ Note: `The initData.js` script will populate Mongo DB and ElasticSearch with som
 
 ![monitor](https://github.com/benas/gamehub.io/raw/master/site/monitor.jpg)
 
+#### RESTful API
+
+##### User details: GET /api/user/:name
+
+Example: /api/user/Foo
+
+```json
+{
+    "_id": "54564692985517c304587d01",
+    "name": "Foo",
+    "email": "foo@bar.org",
+    "lastConnection": "2014-12-02T23:50:59.218Z"
+}
+```
+
+##### Game details: GET /api/game/:id
+
+Example: /api/game/5456476066be11c704942161
+
+```json
+{
+    "_id":"5456476066be11c704942161",
+    "user":"54564692985517c304587d01",
+    "white":"Foo",
+    "black":"Anonymous",
+    "pgn":"1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. O-O Bc5 5. c3 O-O 6. d4 exd4 7. cxd4 Bb4",
+    "result":"1-0"
+}
+```
+
 # Contribution
 
 There are probably some points of improvement in the application design, structure or code.
