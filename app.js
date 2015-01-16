@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
-
+var url = require("url");
 var env = process.env.NODE_ENV || 'default';
 var config = require('config');
 
@@ -47,6 +47,12 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 var search = require('./routes/search');
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use('/', routes);
 app.use('/login', login);
 app.use('/register', register);
@@ -54,13 +60,24 @@ app.use('/account', account);
 app.use('/play', play);
 app.use('/api', api);
 app.use('/search', search);
-
+app.set('trust proxy', '192.168.12.77'); // specify a single subnet
 // configure error handlers
 require('./config/errorHandlers.js')(app);
 
-// launch app server
-var server = require('http').createServer(app).listen(3000);
 
+
+var url_path='192.168.12.77';
+var port=3000;
+
+// launch app server
+
+var server = require('http').createServer(app);//.listen(port,url_path);//.listen(3000,'192.168.12.77').listen());
+//server.listen(app.listen(port,url_path));
+//server.listen(3000,"192.168.12.77");
+
+server.listen(port);
+console.log(server.address());
 require('./config/socket.js')(server);
+//app.listen('192.168.12.77');
 
 module.exports = app;
