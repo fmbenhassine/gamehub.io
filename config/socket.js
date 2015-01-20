@@ -1,6 +1,5 @@
 module.exports = function (server) {
 
-
     var io = require('socket.io').listen(server);
 
     var chess =  require('chess.js');
