@@ -5,7 +5,7 @@ $( document ).ready(function() {
      * This name is then passed to the socket connection handshake query
      */
     var username;
-    var time_out=300;//5 minutes in seconds
+    var time_out=30;//5 minutes in seconds
     if($("#loggedUser").length) {
         username = $("#loggedUser").data("user");
     } else {
