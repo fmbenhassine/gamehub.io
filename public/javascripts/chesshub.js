@@ -5,6 +5,7 @@ $( document ).ready(function() {
      * This name is then passed to the socket connection handshake query
      */
     var username;
+    var time_out=300;//5 minutes in seconds
     if($("#loggedUser").length) {
         username = $("#loggedUser").data("user");
     } else {
@@ -133,6 +134,47 @@ $( document ).ready(function() {
         var side = $("#board").data('side');
         var opponentSide = side === "black" ? "white" : "black";
 
+	/*
+         * Timer : displays time taken by each player while making moves
+         */
+        var timer=function(time_set)
+        {
+            if(true)
+            {
+                if(game.turn().toString()=='w')
+                {
+                    time_set[0]+=1;
+                    if(time_set[0]>time_out)
+                    {
+                        //handle time out
+                        $('#gameResult').html('TimeOut! Black Won !');
+                        $('#gameResultPopup').modal({
+                            keyboard: false,
+                            backdrop: 'static'
+                        });
+                        clearInterval(timer_interval);
+                    }
+                    $("#timew").html(("00" + Math.floor(time_set[0]/60)).slice (-2)+":"+("00" + time_set[0]%60).slice (-2));
+                }
+                if(game.turn().toString()=='b')
+                {
+                    time_set[1]+=1;
+                    if(time_set[1]>time_out)
+                    {
+                        //handle time out
+                        $('#gameResult').html('TimeOut!  White Won !');
+                        $('#gameResultPopup').modal({
+                            keyboard: false,
+                            backdrop: 'static'
+                        });
+                        clearInterval(timer_interval);
+                    }
+                    $("#timeb").html(("00" + Math.floor(time_set[1]/60)).slice (-2)+":"+("00" + time_set[1]%60).slice (-2));
+                }
+            }
+            return time_set;
+        };
+
         /*
          * When a piece is dragged, check if it the current player has the turn
          */
@@ -217,6 +259,9 @@ $( document ).ready(function() {
          * A second player has joined the game => the game can start
          */
         socket.on('ready', function (data) {
+	    //intialize the timer
+            var time_sets=[0,0];
+            timer_interval=setInterval(function(){ time_sets=timer(time_sets)}, 1000);//repeat every second
             $('#turn-w').addClass("fa fa-spinner");
             $('#player-white').html(data.white);
             $('#player-black').html(data.black);
