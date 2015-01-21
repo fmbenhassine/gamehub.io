@@ -6,6 +6,7 @@ $( document ).ready(function() {
      */
     var username;
     var time_out=300;//5 minutes in seconds
+    var enable_time_add=false;//add 10 sec to every valid move if enabled( Blitz mode rules)
     if($("#loggedUser").length) {
         username = $("#loggedUser").data("user");
     } else {
@@ -134,17 +135,28 @@ $( document ).ready(function() {
         var side = $("#board").data('side');
         var opponentSide = side === "black" ? "white" : "black";
 
-	/*
+	    /*
          * Timer : displays time taken by each player while making moves
+         * Displays time remaining for each player
          */
+        var black=false;
+        var white=false;
         var timer=function(time_set)
         {
             if(true)
             {
                 if(game.turn().toString()=='w')
                 {
-                    time_set[0]+=1;
-                    if(time_set[0]>time_out)
+                    time_set[0]-=1;
+                    if(black)
+                    {
+                        if(enable_time_add)//if enabled  will add 10 sec to each valid move
+                            time_set[1]+=10;
+                        black=false;
+
+                    }
+                    white=true;
+                    if(time_set[0]<=0)
                     {
                         //handle time out
                         $('#gameResult').html('TimeOut! Black Won !');
@@ -154,12 +166,19 @@ $( document ).ready(function() {
                         });
                         clearInterval(timer_interval);
                     }
-                    $("#timew").html(("00" + Math.floor(time_set[0]/60)).slice (-2)+":"+("00" + time_set[0]%60).slice (-2));
                 }
                 if(game.turn().toString()=='b')
                 {
-                    time_set[1]+=1;
-                    if(time_set[1]>time_out)
+                    time_set[1]-=1;
+                    if(white)
+                    {
+                        if(enable_time_add)//if enabled  will add 10 sec to each valid move
+                            time_set[0]=time_set[0]+10;
+                        white=false;
+
+                    }
+                    black=true;
+                    if(time_set[1]<=0)
                     {
                         //handle time out
                         $('#gameResult').html('TimeOut!  White Won !');
@@ -169,8 +188,9 @@ $( document ).ready(function() {
                         });
                         clearInterval(timer_interval);
                     }
-                    $("#timeb").html(("00" + Math.floor(time_set[1]/60)).slice (-2)+":"+("00" + time_set[1]%60).slice (-2));
                 }
+                $("#timeb").html(("00" + Math.floor(time_set[1]/60)).slice (-2)+":"+("00" + time_set[1]%60).slice (-2));
+                $("#timew").html(("00" + Math.floor(time_set[0]/60)).slice (-2)+":"+("00" + time_set[0]%60).slice (-2));
             }
             return time_set;
         };
@@ -261,6 +281,8 @@ $( document ).ready(function() {
         socket.on('ready', function (data) {
 	    //intialize the timer
             var time_sets=[0,0];
+            time_sets[0]=time_out;
+            time_sets[1]=time_out;
             timer_interval=setInterval(function(){ time_sets=timer(time_sets)}, 1000);//repeat every second
             $('#turn-w').addClass("fa fa-spinner");
             $('#player-white').html(data.white);
