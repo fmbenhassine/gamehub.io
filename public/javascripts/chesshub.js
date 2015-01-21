@@ -6,6 +6,8 @@ $( document ).ready(function() {
      */
     var username;
     var time_out=300;//5 minutes in seconds
+    var domain_url="http://localhost:3000";// The url where the game is to be run (dont include '/' at the end)
+
     var enable_time_add=false;//add 10 sec to every valid move if enabled( Blitz mode rules)
     if($("#loggedUser").length) {
         username = $("#loggedUser").data("user");
@@ -14,13 +16,13 @@ $( document ).ready(function() {
     }
 
     // socket used for real time games
-    var socket = io('http://localhost:3000', { query: 'user=' + username });
+    var socket = io(domain_url, { query: 'user=' + username });
 
     //socket used to broadcast live games on tv page
-    var tvSocket = io('http://localhost:3000/tv');
+    var tvSocket = io(domain_url+'/tv');
 
     // socket used to broadcast events to monitoring page
-    var monitorSocket = io('http://localhost:3000/monitor');
+    var monitorSocket = io(domain_url+'/monitor');
 
     // Puzzle of the day: initialize a chess board with puzzle data
     if ($("#pod").length) {
@@ -120,6 +122,47 @@ $( document ).ready(function() {
             hideAfter: 10
         });
     }
+
+    /*
+     *  Show chats to be displayed
+     *  Chats are never stored .
+     *  So , chats are lost if any page is reloaded .
+     *  Chat pops up whenver there's a new message
+     *  TODO :Store chat conversations .
+     */
+    var socket1 = io();
+    $('.chat-form').submit(function(){
+
+        if( $('#m').val().length>0)
+        {
+            socket1.emit('chat message', username+' : '+$('#m').val());
+        }
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat message', function(msg){
+        //new chat message ..pop the chats
+        $(".chat").show();
+        document.getElementById('chat-active').className='active';
+        $('#messages').append($('<li>').text(msg));
+    });
+
+    /*
+     *  show or hide the chats window
+     */
+    showhideChat= function () {
+        $(".chat").toggle();
+        if($(".chat").is(":visible") == true)//if chat is visible then make Chats menu active
+        {
+            document.getElementById('chat-active').className='active';
+        }
+        else
+            document.getElementById('chat-active').className='inactive';
+
+    };
+    //initially hide chat
+    $(".chat").hide();
+    document.getElementById('chat-active').className='inactive';//make chat inactive
 
     /*
      * Game page
@@ -267,7 +310,7 @@ $( document ).ready(function() {
          * When a new game is created, the game creator should wait for an opponent to join the game
          */
         socket.on('wait', function () {
-            var url = "http:/localhost:3000/game/" + token + "/" + opponentSide;
+            var url = domain_url+"/game/" + token + "/" + opponentSide;
             $('#gameUrl').html(url);
             $('#gameUrlPopup').modal({ // show modal popup to wait for opponent
                 keyboard: false,
@@ -431,7 +474,7 @@ $( document ).ready(function() {
         $( "#searchGameFormSubmit" ).on("click", function( event ) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/search",
+                url: domain_url+"/search",
                 data: {
                     white: $( "input[name$='white']" ).val(),
                     black: $( "input[name$='black']" ).val(),
