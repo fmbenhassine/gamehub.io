@@ -6,8 +6,8 @@ $( document ).ready(function() {
      */
     var username;
     var time_out=300;//5 minutes in seconds
-    var domain_url="http://localhost:3000";// The url where the game is to be run (dont include '/' at the end)
-
+    var domain_url="http://192.168.12.77:3000";// The url where the game is to be run (dont include '/' at the end)
+    var enable_time_out=false;// play with timeout ? (true/false)
     var enable_time_add=false;//add 10 sec to every valid move if enabled( Blitz mode rules)
     if($("#loggedUser").length) {
         username = $("#loggedUser").data("user");
@@ -186,21 +186,41 @@ $( document ).ready(function() {
         var white=false;
         var timer=function(time_set)
         {
-            if(true)
+             /*
+             added condtion to checkout for gameover
+             */
+            var possibleMoves = game.moves();
+            //alert(game.game_over());
+            // if the game is over, reload a new game
+            if (game.in_draw() === true ) {
+                $('#gameResult').html('Game is a draw !');
+                $('#gameResultPopup').modal({
+                    keyboard: false,
+                    backdrop: 'static'
+                });
+            }
+
+            if(game.turn().toString()=='w')
             {
-                if(game.turn().toString()=='w')
+                if(game.game_over() === true || possibleMoves.length===0)
                 {
-                    time_set[0]-=1;
-                    if(black)
-                    {
-                        if(enable_time_add)//if enabled  will add 10 sec to each valid move
-                            time_set[1]+=10;
-                        black=false;
+                    $('#gameResult').html('Game Over.Black Won !');
+                    $('#gameResultPopup').modal({
+                        keyboard: false,
+                        backdrop: 'static'
+                    });
+                }
+                if(enable_time_out)
+                {
+                    time_set[0] -= 1;
+                    if (black) {
+                        if (enable_time_add)//if enabled  will add 10 sec to each valid move
+                            time_set[1] += 10;
+                        black = false;
 
                     }
-                    white=true;
-                    if(time_set[0]<=0)
-                    {
+                    white = true;
+                    if (time_set[0] <= 0) {
                         //handle time out
                         $('#gameResult').html('TimeOut! Black Won !');
                         $('#gameResultPopup').modal({
@@ -210,19 +230,27 @@ $( document ).ready(function() {
                         clearInterval(timer_interval);
                     }
                 }
-                if(game.turn().toString()=='b')
+            }
+            if(game.turn().toString()=='b')
+            {
+                if(game.game_over() === true || possibleMoves.length===0)
                 {
-                    time_set[1]-=1;
-                    if(white)
-                    {
-                        if(enable_time_add)//if enabled  will add 10 sec to each valid move
-                            time_set[0]=time_set[0]+10;
-                        white=false;
-
+                    $('#gameResult').html('Game Over. White Won !');
+                    $('#gameResultPopup').modal({
+                        keyboard: false,
+                        backdrop: 'static'
+                    });
+                }
+                if(enable_time_out)
+                {
+                    time_set[1] -= 1;
+                    if (white) {
+                        if (enable_time_add)//if enabled  will add 10 sec to each valid move
+                            time_set[0] = time_set[0] + 10;
+                        white = false;
                     }
-                    black=true;
-                    if(time_set[1]<=0)
-                    {
+                    black = true;
+                    if (time_set[1] <= 0) {
                         //handle time out
                         $('#gameResult').html('TimeOut!  White Won !');
                         $('#gameResultPopup').modal({
@@ -232,8 +260,11 @@ $( document ).ready(function() {
                         clearInterval(timer_interval);
                     }
                 }
-                $("#timeb").html(("00" + Math.floor(time_set[1]/60)).slice (-2)+":"+("00" + time_set[1]%60).slice (-2));
-                $("#timew").html(("00" + Math.floor(time_set[0]/60)).slice (-2)+":"+("00" + time_set[0]%60).slice (-2));
+            }
+            if(enable_time_out)
+            {
+                $("#timeb").html(("00" + Math.floor(time_set[1] / 60)).slice(-2) + ":" + ("00" + time_set[1] % 60).slice(-2));
+                $("#timew").html(("00" + Math.floor(time_set[0] / 60)).slice(-2) + ":" + ("00" + time_set[0] % 60).slice(-2));
             }
             return time_set;
         };
