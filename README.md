@@ -35,7 +35,7 @@ Here is a list of core features:
 
 # Architecture
 
-![architecture](https://github.com/benas/gamehub.io/raw/master/site/gamehub.png)
+![architecture](https://github.com/benas/gamehub.io/raw/master/site/gamehub.jpg)
 
 # Gaming logic
 
