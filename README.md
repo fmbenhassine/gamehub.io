@@ -33,6 +33,10 @@ Here is a list of core features:
 * "TV" page to broadcast any real time content (/tv)
 * Real time game indexing and searching using ElasticSearch (/search)
 
+# Architecture
+
+![architecture](https://github.com/benas/gamehub.io/raw/master/site/gamehub.png)
+
 # Gaming logic
 
 GameHub.io uses a simple gaming sequence through Socket.io that works for 2+ players. Here is a simplified diagram of most relevant events:
