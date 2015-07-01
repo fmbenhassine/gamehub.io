@@ -4,7 +4,6 @@ $( document ).ready(function() {
      * When the user is logged in, it's name is loaded in the "data" attribute of the "#loggedUser" element.
      * This name is then passed to the socket connection handshake query
      */
-
     var username;
     var time_out=300;//5 minutes in seconds
     var domain_url="http://192.168.12.77:3000";// The url where the game is to be run (dont include '/' at the end)
