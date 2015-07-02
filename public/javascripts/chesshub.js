@@ -4,9 +4,9 @@ $( document ).ready(function() {
      * When the user is logged in, it's name is loaded in the "data" attribute of the "#loggedUser" element.
      * This name is then passed to the socket connection handshake query
      */
-
+    //alert("hi");
     var username;
-    var time_out=300;//5 minutes in seconds
+    var time_out;//5 minutes in seconds
     var domain_url="http://192.168.12.77:3000";// The url where the game is to be run (dont include '/' at the end)
     var enable_time_out=false;// play with timeout ? (true/false)
     var enable_time_add=false;//add 10 sec to every valid move if enabled( Blitz mode rules)
@@ -15,6 +15,42 @@ $( document ).ready(function() {
     } else {
         username = "Anonymous";
     }
+    if(true)//$("#timeoutEnable").data('timeout'))
+    {
+
+        enable_time_out=$("#timeoutEnable").data('timeout');
+        time_out=$("#timeoutEnable").data('timeouttime1');
+    }
+
+
+
+    $('#game_timeout_enabler').checked=false;
+    $("#game_timeout_time").hide();
+    $('#game_timeout_enabler').change(
+        function(){
+            if ($(this).is(':checked')) {
+                enable_time_out=true;
+                $("#game_timeout_time").show();
+            }
+            else{
+                enable_time_out=false;
+                $("#game_timeout_time").hide();
+            }
+        });
+
+    /* TIME OUT settings  Bar */
+    /*
+    if(document.getElementById('game_timeout_enabler').checked)
+    {
+        alert("tick");
+        enable_time_out=$("#gameSettings").data("timeout");
+        //time_out=$("timeoutTime").data('timeoutTime');
+        $("#game_timeout_time").toggle();
+    }
+    if(!document.getElementById('game_timeout_enabler').checked) {
+        alert("not tick");
+        $("#game_timeout_time").toggle();
+    }*/
 
     // socket used for real time games
     var socket = io(domain_url, { query: 'user=' + username });
@@ -200,7 +236,13 @@ $( document ).ready(function() {
                     backdrop: 'static'
                 });
             }
-
+            if(game.in_stalemate()==true){
+                $('#gameResult').html('Stalemate !');
+                $('#gameResultPopup').modal({
+                    keyboard: false,
+                    backdrop: 'static'
+                });
+            }
             if(game.turn().toString()=='w')
             {
                 if(game.game_over() === true || possibleMoves.length===0)
@@ -338,14 +380,16 @@ $( document ).ready(function() {
          */
         socket.emit('join', {
             'token': token,
-            'side': side
+            'side': side,
+
+
         });
 
         /*
          * When a new game is created, the game creator should wait for an opponent to join the game
          */
         socket.on('wait', function () {
-            var url = domain_url+"/game/" + token + "/" + opponentSide;
+            var url = domain_url+"/game/" + token + "/" + opponentSide+'/'+time_out;
             $('#gameUrl').html(url);
             $('#gameUrlPopup').modal({ // show modal popup to wait for opponent
                 keyboard: false,
@@ -357,6 +401,7 @@ $( document ).ready(function() {
          * A second player has joined the game => the game can start
          */
         socket.on('ready', function (data) {
+
 	    //intialize the timer
             var time_sets=[0,0];
             time_sets[0]=time_out;

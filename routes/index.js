@@ -27,16 +27,38 @@ router.get('/', function(req, res) {
        });
     });
 });
-
 router.get('/game/:token/:side', function(req, res) {
     var token = req.params.token;
     var side = req.params.side;
+
     res.render('partials/game', {
         title: 'Chess Hub - Game ' + token,
         user: req.user,
         isPlayPage: true,
         token: token,
         side: side
+    });
+});
+
+router.get('/game/:token/:side/:timeout', function(req, res) {
+    var token = req.params.token;
+    var side = req.params.side;
+    var timeout=req.params.timeout;
+    var enable=false;
+    if(timeout>0){
+        enable=true;
+    }
+
+    console.log(timeout);
+    console.log(enable);
+    res.render('partials/game', {
+        title: 'Chess Hub - Game ' + token,
+        user: req.user,
+        isPlayPage: true,
+        token: token,
+        side: side,
+        timeout:enable,
+        timeouttime1:timeout
     });
 });
 
