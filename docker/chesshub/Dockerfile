@@ -1,4 +1,4 @@
-FROM node:0.10
+FROM node:0.10.40
 MAINTAINER Hussein Galal
 
 ENV GITHUB_REPO=https://github.com/galal-hussein/gamehub.io.git
@@ -12,7 +12,7 @@ RUN apt-get update \
 && npm install 
 
 ADD ./config/default.json config/default.json
-ADD ./initData.js initData.js
+#ADD ./initData.js initData.js
 
 EXPOSE 3000
 

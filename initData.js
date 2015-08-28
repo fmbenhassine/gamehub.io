@@ -59,10 +59,13 @@ User.findOne({email: 'foo@bar.org'} ,function (err, user) {
 /* Init elastic search server */
 
 var elasticsearch = require('elasticsearch');
-var client = new elasticsearch.Client({host: "'"+config.get('chesshub.es.host')+":"+config.get('chesshub.es.port')+"'"});
-
+var connectionString = "http://"+config.get('chesshub.es.host')+":"+config.get('chesshub.es.port');
+var client = new elasticsearch.Client({
+host: connectionString,
+log: 'trace'
+});
 client.ping({
-    requestTimeout: 1000
+    requestTimeout: 5000
 }, function (error) {
     if (error) {
         console.error('elasticsearch is down!');
