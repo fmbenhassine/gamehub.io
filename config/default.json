@@ -1,6 +1,6 @@
 {
     "chesshub": {
-        "db": "mongodb://localhost/test"
+        "db": "mongodb://localhost/test",
 	"es":{
 		 "host": "localhost",
 		 "port": "9200"
