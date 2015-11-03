@@ -1,6 +1,8 @@
 var fs = require('fs');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var config = require('config');
+mongoose.connect(config.get('chesshub.db'));
+//mongoose.connect('mongodb://localhost/test');
 
 fs.readdirSync(__dirname + '/models').forEach(function (file) {
     if (~file.indexOf('.js')) require(__dirname + '/models/' + file);
@@ -57,10 +59,13 @@ User.findOne({email: 'foo@bar.org'} ,function (err, user) {
 /* Init elastic search server */
 
 var elasticsearch = require('elasticsearch');
-var client = new elasticsearch.Client(); // default to localhost:9200
-
+var connectionString = "http://"+config.get('chesshub.es.host')+":"+config.get('chesshub.es.port');
+var client = new elasticsearch.Client({
+host: connectionString,
+log: 'trace'
+});
 client.ping({
-    requestTimeout: 1000
+    requestTimeout: 5000
 }, function (error) {
     if (error) {
         console.error('elasticsearch is down!');

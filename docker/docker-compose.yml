@@ -1,0 +1,25 @@
+mongo:
+  image: mongo:2.2.7
+  ports:
+    - 127.0.0.1:27017:27017
+  volumes:
+    - /data/db:/data/db
+  restart: always
+
+elasticsearch:
+  image: elasticsearch:1.4
+  ports:
+    - 127.0.0.1:9200:9200
+    - 127.0.0.1:9300:9300
+  volumes:
+    - /usr/share/elasticsearch/data:/usr/share/elasticsearch/data
+  restart: always
+
+chesshub:
+  build: ./chesshub
+  ports:
+    - 3000:3000
+  links:
+    - elasticsearch:elasticsearch
+    - mongo:mongo
+  restart: always
