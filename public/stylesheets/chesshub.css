@@ -103,3 +103,29 @@ body {
 .table td, th {
     text-align: center;
 }
+/*chat css*/
+.chat { font: 15px Helvetica, Arial;padding: 0; box-sizing: border-box; border: 1px solid ;border-color: #428BCA;
+    right:15px;top:3px;position:fixed;
+    height: 99%;
+}
+.chat-title{text-align: center;color:#31708F;height:5%;display: block;position: relative;padding-top: 10px;background-color: #D9EDF7}
+.chat-container{  border: 1px solid ;border-color: #428BCA;
+    display: block;
+    height: 87%;
+    position: relative;
+}
+
+form .chat-form {
+    border-top:1px solid #5599ff; padding: 3px;  width: 100%;;position: relative;
+    height: 8%;
+}
+.chat-input-form {width:75% ;height: 100%;margin-top:4px}
+.submit-chat {width:25%;color: #111}
+#messages { list-style-type: none; margin: 0; padding: 0;overflow-y: scroll;
+    position: relative;
+    width:250px;
+    height: 100%;
+}
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #F5F5F5; }
+#messages li:nth-child(even) { background: #5599ff; }

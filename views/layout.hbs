@@ -23,20 +23,35 @@
             <li class="{{#if isPlayPage}} active {{/if}}"><a href="/play" title="Create a new game"><i class="fa fa-gamepad"></i> Play</a></li>
             <li class="{{#if isTvPage}} active {{/if}}"><a href="/tv" title="Watch live games"><i class="fa fa-eye"></i> Tv</a></li>
             <li class="{{#if isSearchPage}} active {{/if}}"><a href="/search" title="Search a game"><i class="fa fa-search"></i> Search</a></li>
+            <li id="chat-active" class="inactive"><a href="#" title="Show/Hide Chat" onclick="showhideChat()"><i class="fa fa-home"></i> Chat</a></li>
             {{#if user}}
             <li class="{{#if isAccountPage}} active {{/if}}"><a href="/account" title="My account"><span id="loggedUser" data-user="{{ user.name }}"></span><i class="fa fa-user"></i> {{ user.name }}</a></li>
             <li><a href="/logout" title="Sign out"><i class="fa fa-sign-out"></i></a></li>
+
             {{else}}
             <li class="{{#if isLoginPage}} active {{/if}}"><a href="/login"><i class="fa fa-sign-in"></i> Sign in</a></li>
             {{/if}}
 
         </ul>
+        <div class="gameSettings">
+            <span id="timeoutEnable" data-timeout="{{ timeout }}"  data-timeouttime1="{{timeouttime1}}"></span>
+
+        </div>
         <h3><i class="fa fa-group"></i> Chess Hub</h3>
     </div>
-
+   <div class="chat" >
+        <h4 class="chat-title">Quick Chat</h4>
+        <div class="chat-container">
+            <ul id="messages"></ul>
+            <form action="" class="chat-form">
+                <input id="m" autocomplete="off" class="chat-input-form"/><button class="submit-chat">Send</button>
+            </form>
+        </div>
+    </div>
     <div class="content">
         {{{body}}}
     </div>
+
 
     <div class="footer">
         <p>&copy; ChessHub 2014, <i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by
@@ -49,7 +64,7 @@
 <script type="text/javascript" src="/javascripts/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
 <script type="text/javascript" src="/javascripts/chessboard-0.3.0.min.js"></script>
-<script type="text/javascript" src="/javascripts/chess.min.js"></script>
+<script type="text/javascript" src="/javascripts/chess.min.update.js"></script>
 <script type="text/javascript" src="/javascripts/lodash.min.js"></script>
 <script type="text/javascript" src="/javascripts/moment.min.js"></script>
 <script type="text/javascript" src="/javascripts/messenger.min.js"></script>
