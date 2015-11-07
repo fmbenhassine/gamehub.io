@@ -1,0 +1,39 @@
+{
+  "name": "chessjs",
+  "version": "0.9.0",
+  "description": "A Javascript chess library for chess move generation/validation, piece placement/movement, and check/checkmate/draw detection",
+  "author": "Jeff Hlywa <jhlywa@gmail.com> (https://github.com/jhlywa)",
+  "contributors": [
+    "Steve Bragg (https://github.com/2sb18)",
+    "E. Azer Koçulu (https://github.com/azer)",
+    "Falco Nogatz (https://github.com/fnogatz)",
+    "jdponomarev (https://github.com/jdponomarev)",
+    "Raminder Singh (https://github.com/imor)",
+    "Stiff (https://github.com/stiff)",
+    "Linmiao Xu (https://github.com/linrock)",
+    "Juan Gacía (https://github.com/jnuserful)"
+  ],
+  "keywords": [
+    "chess"
+  ],
+  "main": "dist/chess.min.js",
+  "ignore": [
+    "/.*",
+    "tests",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jnuserful/chessjs.git"
+  },
+  "homepage": "https://github.com/juangl/chessjs",
+  "_release": "0.9.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.9.0",
+    "commit": "2920f95a9455f07e4559f5f46d9ba1d9425f9bde"
+  },
+  "_source": "git://github.com/juangl/chessjs.git",
+  "_target": "0.9.0",
+  "_originalSource": "juangl/chessjs"
+}

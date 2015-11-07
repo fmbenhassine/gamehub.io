@@ -1,0 +1,27 @@
+{
+  "name": "chessboardjs",
+  "version": "0.3.2",
+  "homepage": "http://chessboardjs.com/",
+  "description": "Standalone JavaScript Chess Board",
+  "main": [
+    "js/chessboard.js",
+    "css/chessboard.css"
+  ],
+  "keywords": [
+    "chess",
+    "board"
+  ],
+  "authors": [
+    "Chris Oakman"
+  ],
+  "license": "MIT",
+  "_release": "0.3.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.2",
+    "commit": "190873cdc3bcac0de89510e7353812f2c9304eb5"
+  },
+  "_source": "git://github.com/vstene/chessboardjs.git",
+  "_target": "0.3.2",
+  "_originalSource": "vstene/chessboardjs"
+}

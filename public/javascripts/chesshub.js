@@ -1,5 +1,9 @@
 $( document ).ready(function() {
 
+    var defaultChessboardCfg = {
+        pieceTheme: '/bower_components/chessboardjs/img/chesspieces/wikipedia/{piece}.png'
+    };
+
     /*
      * When the user is logged in, it's name is loaded in the "data" attribute of the "#loggedUser" element.
      * This name is then passed to the socket connection handshake query
@@ -23,7 +27,10 @@ $( document ).ready(function() {
 
     // Puzzle of the day: initialize a chess board with puzzle data
     if ($("#pod").length) {
-        var pod = new ChessBoard('pod', $("#pod").data('fen'));
+        var podChessboardCfg = _.extend(defaultChessboardCfg, {
+            position: $("#pod").data('fen')
+        });
+        var pod = new ChessBoard('pod', podChessboardCfg);
         $('#podSolution').popover();
     }
 
@@ -179,7 +186,7 @@ $( document ).ready(function() {
          * When a piece is dragged, check if it the current player has the turn
          */
         var onDragStart = function(source, piece, position, orientation) {
-            if (game.game_over() === true ||
+            if (game.gameOver() === true ||
                 (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
                 (game.turn() === 'b' && piece.search(/^w/) !== -1) ||
                 (game.turn() !== side.charAt(0) )) {
@@ -222,7 +229,7 @@ $( document ).ready(function() {
         /*
          * Initialize a new board
          */
-        var cfg = {
+        var cfg = _.extend(defaultChessboardCfg, {
             draggable: true,
             position: 'start',
             moveSpeed: 'slow',
@@ -232,7 +239,7 @@ $( document ).ready(function() {
             snapbackSpeed: 500,
             snapSpeed: 150,
             orientation: side
-        };
+        });
         var board = new ChessBoard('board', cfg);
 
         /*
@@ -326,7 +333,10 @@ $( document ).ready(function() {
      * TV page
      */
     if ($("#trg").length) {
-        var trg = new ChessBoard('trg', 'start'); // initialize a chess board with the top rated live game
+        var tvChessboardCfg = _.extend(defaultChessboardCfg, {
+            position: 'start'
+        });
+        var trg = new ChessBoard('trg', tvChessboardCfg); // initialize a chess board with the top rated live game
         tvSocket.on('new-top-rated-game-move', function(data){
             trg.position(data.fen);
             if ($("#tv-game-details").length) {

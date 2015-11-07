@@ -1,0 +1,15 @@
+{
+  "name": "chessboardjs",
+  "version": "0.3.0",
+  "homepage": "http://chessboardjs.com/",
+  "description": "Standalone JavaScript Chess Board",
+  "main": ["js/chessboard.js", "css/chessboard.css"],
+  "keywords": [
+    "chess",
+    "board"
+  ],
+  "authors": [
+    "Chris Oakman"
+  ],
+  "license": "MIT"
+}

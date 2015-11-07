@@ -1,0 +1,35 @@
+{
+  "name": "gamehub.io",
+  "version": "1.0.0",
+  "homepage": "https://github.com/benas/gamehub.io",
+  "authors": [
+    "Mahmoud Ben Hassine"
+  ],
+  "description": "Chess Hub web application",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "chess",
+    "chesshub"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.5",
+    "jquery": "2.1.4",
+    "highcharts": "4.1.9",
+    "moment": "2.10.6",
+    "lodash": "2.4.1",
+    "messenger": "1.4.2",
+    "fontawesome": "4.4.0",
+    "chessjs": "juangl/chessjs#0.9.0",
+    "chessboardjs": "vstene/chessboardjs#0.3.2"
+  }
+}
