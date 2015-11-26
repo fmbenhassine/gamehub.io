@@ -87,6 +87,7 @@ Chess logic on the client side uses the excellent <a href="https://github.com/jh
 
 ```
 $> npm install
+$> bower install
 $> node initData.js
 $> node .
 ```
