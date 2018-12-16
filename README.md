@@ -1,5 +1,11 @@
 # About GameHub.io
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/benas/gamehub.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/benas/gamehub.io)
+
+:warning: **16/12/2018**: This project seems to be dead but it is not! Here are a couple of things I am planning to do:
+
+* Add a docker compose file to start the entire stack with a single command
+* Update dependencies to the latest version
+* Replace the current [ad-hoc monitoring feature] with something like influxdb + grafana.
 
 GameHub.io is an attempt to make a real-time multi player gaming server using the following technologies:
 
