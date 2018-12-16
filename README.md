@@ -5,7 +5,7 @@
 
 * Add a docker compose file to start the entire stack with a single command
 * Update dependencies to the latest version
-* Replace the current [ad-hoc monitoring feature] with something like influxdb + grafana.
+* Replace the current [ad-hoc monitoring feature](https://github.com/benas/gamehub.io/blob/master/README.md#real-time-monitoring-dashboard) with something like influxdb + grafana.
 
 GameHub.io is an attempt to make a real-time multi player gaming server using the following technologies:
 
